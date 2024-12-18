@@ -68,8 +68,67 @@ int main()
 
     return 0;
 }
-*/
 
 // --------------------------------------------------
 
 /// 접근 제어 지시자
+/// public : 어디서든 접근이 가능하다.
+/// private : 외부에서 접근이 불가능합니다.
+/// protected : 외부에서는 접근이 불가능하나, 상속된 파생 객체(클래스)에서는 접근이 허용된다.
+
+/// (캡슐화)
+/// 객체를 보호하기 위해 사용된다.
+
+#include <iostream>
+
+using namespace std;
+
+struct Student
+{
+private:
+    const char* name;
+    int id;
+    int age;
+    const char* phoneNumber;
+
+public: // set() --> save, get() --> load : 형태로 시작되는 함수를 주로 public으로 사용한다.
+    void SetInfo(const char* _name, int _id, int _age, const char* _phoneNumber)
+    {
+        name = _name;
+        id = _id;
+        age = _age;
+        phoneNumber = _phoneNumber;
+    }
+
+    void GetShow()
+    {
+        cout << "이름 : " << name;
+        cout << ", 학번 : " << id;
+        cout << ", 나이 : " << age;
+        cout << ", 전화번호 : " << phoneNumber << endl;
+    }
+
+    void SetId(int _id)
+    {
+        id = _id;
+    }
+
+    void SetAge(int _age)
+    {
+        age = _age;
+    }
+};
+
+int main()
+{
+    Student s;
+
+    s.SetInfo("홍길동", 123456789, 20, "010-1234-5678");
+    s.GetShow();
+
+    s.SetId(987654321); // s.id = 987654321;의 형태는 private이기 때문에 사용이 불가능하다.
+    s.GetShow();
+
+    return 0;
+}
+*/
