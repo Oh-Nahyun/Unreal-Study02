@@ -5,6 +5,8 @@
 //  Created by 오나현 on 12/18/24.
 //
 
+#define _CRT_SECURE_NO_WARNINGS
+
 /// 생성자 (Constructor)
 /// : 객체 생성과 동시에 초기화 시켜주는 것
 
@@ -263,12 +265,116 @@ Student::~Student()
 {
     cout << "[ Student::~Student() Called ]" << endl;
 }
-*/
 
 // --------------------------------------------------
 
 /// CppProject_7_참조자.cpp 파일 참고
 
-/// 복사 생성자
+/// 복사 생성자 (Copy Constructor)
+
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    //int a;
+    //a = 40;
+    int a = 40;     // C 언어 스타일의 초기화
+    int b(50);      // C++ 언어 스타일의 초기화(생성 + 데이터 적용/초기화) (int b = 50;와 같은 의미)
+
+    cout << "a : " << a << endl;
+    cout << "b : " << b << endl;
+
+    return 0;
+}
+
+// --------------------------------------------------
+
+#include <iostream>
+
+using namespace std;
+
+class myClass
+{
+private:
+    int num1;
+    int num2;
+public:
+    myClass(int a, int b)
+    {
+        num1 = a;
+        num2 = b;
+    }
+
+    void ShowData()
+    {
+        cout << "num1 : " << num1 << ", num2 : " << num2 << endl;
+    }
+};
+
+int main()
+{
+    myClass mc1(50, 40);
+    myClass mc2 = mc1;      // ==> myClass mc2(mc1);와 같은 의미
+
+    mc2.ShowData();
+
+    return 0;
+}
 
 
+//myClass(int a, int b)
+//{
+//    num1 = a;
+//    num2 = b;
+//}
+//myClass(const myClass& mc) // 디폴트 복사 생성자 형태
+//{
+//    num1 = mc.num1;
+//    num2 = mc.num2;
+//} // ==> 얕은 복사 (Shallow Copy)
+*/
+
+// --------------------------------------------------
+
+/// 얕은 복사의 문제점, 그리고 깊은 복사 (Deep Copy)
+
+#include <iostream>
+
+using namespace std;
+
+class MyClass
+{
+private:
+    char* str;
+public:
+    MyClass(const char* aStr)
+    {
+        str = new char[strlen(aStr) + 1];   // 동적으로 초기화
+        strcpy(str, aStr);
+
+        cout << "MyClass(const char* aStr) Called" << endl;
+    }
+
+    ~MyClass()
+    {
+        delete[] str;   // 자동 삭제
+
+        cout << "~MyClass() Called" << endl;
+    } // 생성자와 소멸자는 메모리 자동 할당해서 좀 더 편하게 사용하기 위해 사용한다.
+
+    void ShowData()
+    {
+        cout << "str : " << str << endl;
+    }
+};
+
+int main()
+{
+    MyClass mc1("My Class");
+
+    mc1.ShowData();
+
+    return 0;
+}
