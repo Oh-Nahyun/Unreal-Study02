@@ -334,7 +334,6 @@ int main()
 //    num1 = mc.num1;
 //    num2 = mc.num2;
 //} // ==> 얕은 복사 (Shallow Copy)
-*/
 
 // --------------------------------------------------
 
@@ -373,8 +372,66 @@ public:
 int main()
 {
     MyClass mc1("My Class");
+    MyClass mc2 = mc1;  // 복사 생성자 // MyClass mc2(mc1);
 
-    mc1.ShowData();
+    mc1.ShowData();     // mc1의 ShowData() 후 삭제되어서 문제가 발생하는 코드가 된다. // ???????????????????????????
+    mc2.ShowData();
 
     return 0;
 }
+
+// --------------------------------------------------
+
+/// (해결) 깊은 복사 ==> 참조 생성 이용
+
+#include <iostream>
+
+using namespace std;
+
+class MyClass
+{
+private:
+    char* str;
+public:
+    MyClass(const char* aStr)
+    {
+        str = new char[strlen(aStr) + 1];
+        strcpy(str, aStr);
+
+        cout << "MyClass(const char* aStr) Called" << endl;
+    }
+
+    MyClass(const MyClass& mc)  // 참조용
+    {
+        str = new char[strlen(mc.str) + 1];
+        strcpy(str, mc.str);
+
+        cout << "MyClass(const MyClass& mc) Called" << endl;
+    }
+
+    ~MyClass()
+    {
+        cout << "~MyClass()의 str : " << str << endl;
+
+        delete[] str;
+
+        cout << "~MyClass() Called" << endl;
+    }
+
+    void ShowData()
+    {
+        cout << "str : " << str << endl;
+    }
+};
+
+int main()
+{
+    MyClass mc1("My Class");
+    MyClass mc2 = mc1;  // 복사 생성자 // MyClass mc2(mc1);
+
+    mc1.ShowData();
+    mc2.ShowData();
+
+    return 0;
+}
+*/
