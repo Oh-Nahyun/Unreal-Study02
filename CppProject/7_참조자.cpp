@@ -38,7 +38,6 @@ int main()
 
 	return 0;
 }
-*/
 
 // --------------------------------------------------
 
@@ -57,3 +56,60 @@ int main()
 
 	return 0;
 }
+
+// --------------------------------------------------
+
+/// 참조를 이용한 Call by Reference
+
+/// 기본 참조 예제1
+
+void Swap(int ref1, int ref2) // Call by Value
+{
+	int temp = ref1;
+	ref1 = ref2;
+	ref2 = temp;
+}
+
+int main()
+{
+	int num1 = 5;
+	int num2 = 10;
+
+	cout << num1 << endl;
+	cout << num2 << endl << endl;
+
+	Swap(num1, num2);
+
+	cout << num1 << endl;
+	cout << num2 << endl << endl;
+
+	return 0;
+}
+
+// --------------------------------------------------
+
+/// 기본 참조 예제1 (수정)
+
+void Swap(int &ref1, int &ref2) // Call by Reference로 변경된다.
+{
+	int temp = ref1;
+	ref1 = ref2;
+	ref2 = temp;
+}
+
+int main()
+{
+	int num1 = 5;
+	int num2 = 10;
+
+	cout << num1 << endl;
+	cout << num2 << endl << endl;
+
+	Swap(num1, num2);			// num1과 ref1은 같은 주소를 공유한다.
+
+	cout << num1 << endl;
+	cout << num2 << endl << endl;
+
+	return 0;
+}
+*/
