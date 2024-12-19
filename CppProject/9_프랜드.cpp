@@ -43,6 +43,7 @@ private:
 	//friend class A;	// 이 위치에서 사용해도 된다. (위치는 상관없다.)
 	int bdata;
 public:
+	//friend class A;
 	B(int _data)
 	{
 		bdata = _data;
