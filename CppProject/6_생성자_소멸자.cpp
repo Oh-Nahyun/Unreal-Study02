@@ -374,10 +374,10 @@ int main()
     MyClass mc1("My Class");
     MyClass mc2 = mc1;  // 복사 생성자 // MyClass mc2(mc1);
 
-    mc1.ShowData();     // mc1의 ShowData() 후 삭제되어서 문제가 발생하는 코드가 된다. // ???????????????????????????
+    mc1.ShowData();
     mc2.ShowData();
 
-    return 0;
+    return 0;   // mc1가 먼저 삭제되고, mc2가 삭제되려고 할 때, 이미 삭제되었기에 문제가 발생하는 코드가 된다.
 }
 
 // --------------------------------------------------
