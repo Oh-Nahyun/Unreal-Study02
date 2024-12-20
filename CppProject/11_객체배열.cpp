@@ -151,4 +151,45 @@ int main()
 
 	return 0;
 }
+
+// --------------------------------------------------
+
+/// this 포인터
+/// 자기 참조 포인터 (this 포인터)
+
+#include <iostream>
+
+using namespace std;
+
+class MyClass
+{
+private:
+	int num1;
+	int num2;
+public:
+	MyClass(int num1, int num2)
+	{
+		//num1 = num1;		// private에 선언한 변수인지 생성자 () 속 변수인지 구분할 수 없는 문제 발생
+		//num2 = num2;
+		this->num1 = num1;	// 이와 같이 해결한다.
+		this->num2 = num2;
+	}
+
+	//MyClass(int num1, int num2) : num1(num1), num2(num2) {} // 위와 같은 생성자이긴 하다.
+
+	void GetInfo()
+	{
+		cout << "num1 : " << num1 << endl;
+		cout << "num2 : " << num2 << endl;
+	}
+};
+
+int main()
+{
+	MyClass mc(10, 20);
+
+	mc.GetInfo();
+
+	return 0;
+}
 */
