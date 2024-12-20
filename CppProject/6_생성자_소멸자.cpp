@@ -422,6 +422,11 @@ public:
     {
         cout << "str : " << str << endl;
     }
+
+    void SetData(const char* aStr)  // 소멸 순서 확인용 함수
+    {
+        strcpy(str, aStr);
+    }
 };
 
 int main()
@@ -431,6 +436,11 @@ int main()
 
     mc1.ShowData();
     mc2.ShowData();
+
+    // A를 만들고, A를 참조한 B를 만들고 나면, 나중에 소멸될 때는 B, A 순서로 소멸된다.
+    // 아래 코드로 확인해보자.
+    mc1.SetData("AA");
+    mc2.SetData("BB");
 
     return 0;
 }
