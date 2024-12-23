@@ -213,4 +213,60 @@ int main()
 }
 
 /// 따라서, 객체를 편하게 수정하기 위해 연산자 오버로딩을 사용하는 것이다.
+
+// --------------------------------------------------
+
+/// 단항 연산자 오버로딩
+
+#include <iostream>
+
+using namespace std;
+
+class NUMBOX
+{
+private:
+	int num1, num2;
+public:
+	NUMBOX() {}	// 기본 생성자 (초기화 X)
+	NUMBOX(int num1, int num2) : num1(num1), num2(num2) {}
+
+	void ShowNumber()
+	{
+		cout << "num1 : " << num1 << ", num2 : " << num2 << endl;
+	}
+
+	NUMBOX operator++()	// 전위 증가
+	{
+		num1 += 1;
+		num2 += 1;
+
+		return *this;
+	}
+
+	NUMBOX operator++(int)	// 후위 증가
+	{
+		NUMBOX temp(*this);
+
+		num1 += 1;
+		num2 += 1;
+
+		return temp;
+	}
+};
+
+int main()
+{
+	NUMBOX nb1(10, 20);
+	NUMBOX nb2;
+
+	nb2 = nb1++;	// nb1++ = operator++(int); 와 같이 후위 증가 연산
+	nb2.ShowNumber();
+	nb1.ShowNumber();
+
+	nb2 = ++nb1;	// ++nb1 = nb.operator++(); 와 같이 전위 증가 연산
+	nb2.ShowNumber();
+	nb1.ShowNumber();
+
+	return 0;
+}
 */
