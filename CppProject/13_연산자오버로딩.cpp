@@ -269,4 +269,153 @@ int main()
 
 	return 0;
 }
+
+// --------------------------------------------------
+
+/// 대입 연산자 오버로딩
+
+#include <iostream>
+
+using namespace std;
+
+class A
+{
+private:
+	int num1, num2;
+public:
+	A() {}	// 디폴트 생성자
+	A(int num1, int num2) : num1(num1), num2(num2) {}
+	void ShowData() { cout << num1 << "," << num2 << endl; }
+};
+
+class B
+{
+private:
+	int num1, num2;
+public:
+	B() {}	// 디폴트 생성자
+	B(int num1, int num2) : num1(num1), num2(num2) {}
+	void ShowData() { cout << num1 << "," << num2 << endl; }
+};
+
+int main()
+{
+	A a1(10, 50);
+	A a2;
+
+	B b1(10, 20);
+	B b2;
+
+	a2 = a1;	// 클래스의 대입	// 얕은 복사
+	b2 = b1;
+
+	a2.ShowData();
+	b2.ShowData();
+
+	return 0;
+}
+
+// --------------------------------------------------
+
+/// 대입 에러 상황
+/// (깊은 복사에 대한 정의, 연산자 오버로딩을 통해 처리)
+
+#include <iostream>
+
+using namespace std;
+
+class Student
+{
+private:
+	char* name;
+	int age;
+public:
+	Student(char* name, int age) : age(age)
+	{
+		this->name = new char[10];
+		strcpy(this->name, name);
+		cout << "Student 생성자 호출" << endl;
+	}
+
+	~Student()
+	{
+		delete[] name;
+		cout << "Student 소멸자 호출" << endl;
+	}
+
+	void ShowInfo()
+	{
+		cout << "이름 : " << name << endl;
+		cout << "나이 : " << age << endl;
+	}
+};
+
+int main()	// 얕은 복사의 Error 발생!!
+{
+	Student st1("장원영", 20);
+	Student st2("안유진", 21);
+
+	st2 = st1;
+
+	st1.ShowInfo();
+	st2.ShowInfo();
+
+	return 0;
+}
+
+// --------------------------------------------------
+
+/// 위 오류 상황 해결 (깊은 복사)
+
+#include <iostream>
+
+using namespace std;
+
+class Student
+{
+private:
+	char* name;
+	int age;
+public:
+	Student(char* name, int age) : age(age)
+	{
+		this->name = new char[10];
+		strcpy(this->name, name);
+		cout << "Student 생성자 호출" << endl;
+	}
+
+	~Student()
+	{
+		delete[] name;
+		cout << "Student 소멸자 호출" << endl;
+	}
+
+	void ShowInfo()
+	{
+		cout << "이름 : " << name << endl;
+		cout << "나이 : " << age << endl;
+	}
+
+	Student& operator=(Student& ref)
+	{
+		delete[] name;
+		name = new char[10];	// 다시 동적 할당
+		strcpy(name, ref.name);
+		age = ref.age;
+		return *this;
+	}
+};
+
+int main()	// 깊은 복사로 Error 해결!!
+{
+	Student st1("장원영", 20);
+	Student st2("안유진", 21);
+
+	st2 = st1;
+
+	st1.ShowInfo();
+	st2.ShowInfo();
+
+	return 0;
+}
 */
