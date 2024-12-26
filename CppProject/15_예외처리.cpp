@@ -126,4 +126,31 @@ int main()
 
 	return 0;
 }
+
+// --------------------------------------------------
+
+/// 스택 풀기 (Stack Unwinding)
+
+#include <iostream>
+
+using namespace std;
+
+void func1() { throw 0; }
+void func2() { func1(); }
+void func3() { func2(); }
+void func4() { func3(); }
+
+int main()
+{
+	try
+	{
+		func4();	// 호출 순서 : func4() -> func3() -> func2() -> func1()
+	}
+	catch (int exception)
+	{
+		cout << "예외 발생, " << exception << "!" << endl;
+	}
+
+	return 0;
+}
 */
