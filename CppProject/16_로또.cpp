@@ -5,6 +5,7 @@
 //  Created by 오나현 on 12/26/24.
 //
 
+/*
 #include <stdio.h>		// 기본
 #include <stdlib.h>		// 랜덤
 #include <time.h>		// 시간
@@ -36,11 +37,11 @@ int main()
 	// [test #1]_글자색 알아보기 (16개)
 	// 0 ~ 15 : 글자색 (16진수 : 0 1 2 3 4 5 6 7 8 9 A B C D E F)
 	// (검정색, 파란색, 녹색, 청록색, 빨간색, 자주색, 노란색, 흰색, 회색, 연한 파랑, 연한 녹색, 연한 청록색, 연한 빨간색, 연한 자주색, 연한 노란색, 밝은 흰색)
-	/*for (i = 0; i < 16; i++)
-	{
-		setColor(i, 0);
-		printf("SetColor %d\n", i);
-	}*/
+	//for (i = 0; i < 16; i++)
+	//{
+	//	setColor(i, 0);
+	//	printf("SetColor %d\n", i);
+	//}
 
 	// [test #2]_글자색 알아보기 (16개)
 	system("color e");	// 첫자리는 글자색 설정
@@ -169,3 +170,4 @@ int main()
 
 	return 0;
 }
+*/
