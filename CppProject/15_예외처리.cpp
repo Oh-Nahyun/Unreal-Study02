@@ -93,8 +93,37 @@ int main()
 
 	return 0;
 }
-*/
 
 // --------------------------------------------------
 
 /// 함수 예외 처리 (Function Exception Handling)
+
+#include <iostream>
+
+using namespace std;
+
+void func(int a, int b)
+{
+	if (b == 0) throw b;	// 참고로 기본 데이터형(int, char 등) 뿐만 아니라 객체(Object)도 예외로 던질 수 있다.
+	cout << a << "를 " << b << "로 나눈 몫 : " << a / b << endl;
+}
+
+int main()
+{
+	int a, b;
+
+	cout << "두개의 정수를 입력하세요. : ";
+	cin >> a >> b;
+
+	try
+	{
+		func(a, b);			// 함수를 이용해서 함수 내에서 throw 할 수 있다.
+	}
+	catch (int exception)
+	{
+		cout << "예외 발생, 나누는 수는 " << b << "가 될 수 없습니다." << endl;
+	}
+
+	return 0;
+}
+*/
