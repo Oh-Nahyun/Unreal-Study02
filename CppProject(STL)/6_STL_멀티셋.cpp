@@ -53,7 +53,6 @@ int main()
 
 	return 0;
 }
-*/
 
 // --------------------------------------------------
 
@@ -109,3 +108,121 @@ int main()
 
 	return 0;
 }
+
+// --------------------------------------------------
+
+/// 예제
+/// upper_bound, lower_bound
+
+#include <iostream>
+#include <set>
+
+using namespace std;
+
+int main()
+{
+	multiset<int> ms;
+
+	ms.insert(9);
+	ms.insert(13);
+	ms.insert(5);
+	ms.insert(11);
+	ms.insert(7);
+	ms.insert(11);
+	ms.insert(3);
+	ms.insert(1);
+	ms.insert(11);
+	ms.insert(15);
+
+	multiset<int>::iterator iter;
+
+	// 전체 확인 출력
+	for (iter = ms.begin(); iter != ms.end(); iter++)
+	{
+		cout << *iter << " / ";
+	}
+	cout << endl << endl;
+
+	// 원소 확인 출력
+	cout << "ms.count(11) : " << ms.count(11) << endl << endl;
+
+	// --------------------------------------------------
+
+	// 이해를 돕기 위해 추가 선언!
+	multiset<int>::iterator start, end;
+
+	// key 값 11이 처음 나온 부분 [폐구간]
+	start = ms.lower_bound(11);
+	cout << "lower_bound(11) : " << *start << endl;
+
+	// key 값 11이 마지막 부분의 다음 (개구간)
+	end = ms.upper_bound(11);
+	cout << "upper_bound(11) : " << *end << endl;
+
+	// 같은 키 값(11)을 가진 부분만 출력 가능 (영역 부분 처리)
+	for (start; start != end; start++)
+	{
+		cout << *start << " / ";
+	}
+	cout << endl << endl;
+
+	return 0;
+}
+
+// --------------------------------------------------
+
+/// 예제
+/// equal_range (pair 구조)
+/// first 는 lower_bound(), second 는 upper_bound() 와 같이 동작한다고 생각하면 된다.
+
+#include <iostream>
+#include <set>
+
+using namespace std;
+
+int main()
+{
+	multiset<int> ms;
+
+	ms.insert(9);
+	ms.insert(13);
+	ms.insert(5);
+	ms.insert(11);
+	ms.insert(7);
+	ms.insert(11);
+	ms.insert(3);
+	ms.insert(1);
+	ms.insert(11);
+	ms.insert(15);
+	ms.insert(11);
+	ms.insert(11);
+
+	multiset<int>::iterator iter;
+
+	// 전체 확인 출력
+	for (iter = ms.begin(); iter != ms.end(); iter++)
+	{
+		cout << *iter << " / ";
+	}
+	cout << endl << endl;
+
+	// 원소 확인 출력
+	cout << "ms.count(11) : " << ms.count(11) << endl << endl;
+
+	// --------------------------------------------------
+
+	// pair<iter, iter> 를 통해 key = 11 의 equal_range() 값을 받는다.
+	//pair<multiset<int>::iterator, multiset<int>::iterator> equal_pair;
+	//equal_pair = ms.equal_range(11);
+	pair<multiset<int>::iterator, multiset<int>::iterator> equal_pair = ms.equal_range(11);	// 위와 같은 코드
+
+	// 확인 출력
+	for (iter = equal_pair.first; iter != equal_pair.second; iter++)
+	{
+		cout << *iter << " / ";
+	}
+	cout << endl << endl;
+
+	return 0;
+}
+*/
