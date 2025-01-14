@@ -119,7 +119,6 @@ int main()
 
 	return 0;
 }
-*/
 
 // --------------------------------------------------
 
@@ -171,7 +170,7 @@ int main()
 	v.push_back(Student("ccc", 10));
 	v.push_back(Student("bca", 24));
 	v.push_back(Student("aaa", 11));
-	v.push_back(Student("ccc", 8));		// 예시 > 이름이 같으니 나이 기준 오름차순
+	v.push_back(Student("ccc", 8));		// 예시 => 이름이 같으니 나이 기준 오름차순
 	v.push_back(Student("vvv", 10));
 
 	// 확인 출력
@@ -187,3 +186,141 @@ int main()
 
 	return 0;
 }
+
+// --------------------------------------------------
+
+/// 연산자 오버로딩을 이용한 Sort
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <ctime>
+
+using namespace std;
+
+class Student
+{
+public:
+	string name;
+	int age;
+	Student(string name, int age) : name(name), age(age) {}
+
+	bool operator<(Student s) const	// 연산자 오버로딩
+	{
+		// 이름이 같으면, 나이가 적은 순
+		if (this->name == s.name)
+		{
+			return this->age < s.age;
+		}
+		// 이름이 다르면, 이름의 사전 순
+		else
+		{
+			return this->name < s.name;
+		}
+	}
+};
+
+void Print(vector<Student>& v)
+{
+	cout << "Student : ";
+
+	for (int i = 0; i < 5; i++)
+	{
+		cout << "[ " << v[i].name << ", " << v[i].age << " ] ";
+	}
+	cout << endl << endl;
+}
+
+int main()
+{
+	vector<Student> v;
+
+	v.push_back(Student("ccc", 10));
+	v.push_back(Student("bca", 24));
+	v.push_back(Student("aaa", 11));
+	v.push_back(Student("ccc", 8));		// 예시 => 이름이 같으니 나이 기준 오름차순
+	v.push_back(Student("vvv", 10));
+
+	// 확인 출력
+	Print(v);
+
+	// --------------------------------------------------
+
+	// 정렬
+	sort(v.begin(), v.end());
+
+	// 확인 출력
+	Print(v);
+
+	return 0;
+}
+
+// --------------------------------------------------
+
+/// 문자열을 거꾸로 만드는 reverse 함수
+
+/// std::reverse 함수
+/// C++ : <algorithm> 헤더파일
+
+/// 사용법 (문자)
+
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+	string str = "AbCdEfGhIjk";
+
+	// 확인 출력
+	cout << str << endl << endl;
+
+	// --------------------------------------------------
+
+	// 역순으로 뒤집기
+	reverse(str.begin(), str.end());
+
+	// 확인 출력
+	cout << str << endl << endl;
+
+	return 0;
+}
+
+/// 사용법 (벡터)
+
+#include <iostream>
+#include <algorithm>
+#include <vector>
+
+using namespace std;
+
+void PrintVector(const vector<int>& v)	// 레퍼런스로 벡터 받아오기
+{
+	//for (vector<int>::iterator iter = v.begin(); iter != v.end(); iter++)
+	//for (auto it = v.begin(); it != v.end(); ++it)
+	for (auto val : v)	// 위 두가지 코드와 같은 코드이다.
+	{
+		cout << val << ", ";
+	}
+	cout << endl << endl;
+}
+
+int main()
+{
+	vector<int> v = { 1,2,3,4,5,6,7,8,9,10,11,12,13,14 };
+
+	// 확인 출력
+	PrintVector(v);
+
+	// --------------------------------------------------
+
+	// 역순으로 뒤집기
+	reverse(v.begin(), v.end());
+
+	// 확인 출력
+	PrintVector(v);
+
+	return 0;
+}
+*/
