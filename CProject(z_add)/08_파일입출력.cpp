@@ -132,4 +132,69 @@ int main()
 
 	return 0;
 }
+
+// --------------------------------------------------
+
+/// 종합 예제
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+	// 기본 단어
+	// {"apple", "banana", "car", "double", "engine"};
+	vector<string> words = {"abcde", "fghji", "klmno", "pqrst", "uvwxyz"};
+	int len = static_cast<int>(words.size());	// 타입 캐스트 (int len = words.size(); 와 같은 코드)
+
+	ifstream readFromFile("words2.txt");
+
+	if (readFromFile.is_open())					// 파일이 열렸는지 확인
+	{
+		// 파일이 존재하는 경우
+		words.clear();							// 예제 단어들 삭제
+
+		while (!readFromFile.eof())				// 파일 끝까지 읽었는지 확인
+		{
+			// 1. istream 의 getline 함수 ((Error 가 날 확률이 높음))
+			//char arr[256];
+			//readFile.getline(arr, 256);		// 한줄씩 읽어오기
+			//cout << arr << endl;
+
+			// 2. string 의 std::getline 함수 ((안정적))
+			string str;
+			getline(readFromFile, str);			// 한줄씩 읽어오기
+			cout << str << endl;
+
+			words.push_back(str);				// 읽어온 단어 저장!! 이것을 사용하여 프로그램 작성!!
+		}
+
+		readFromFile.close();					// 파일 닫기
+	}
+	else
+	{
+		// 파일이 없는 경우 >> 새로 만들어 주기
+		ofstream writeToFile;
+		writeToFile.open("words2.txt");			// 파일이 없으니 생성된다.
+
+		for (int i = 0; i < len; i++)
+		{
+			string temp = words[i];
+			if (i != len - 1)
+			{
+				temp += "\n";					// 마지막 단어 빼고 엔터(\n) 넣어주기
+			}
+
+			writeToFile.write(temp.c_str(), temp.size());
+		}
+
+		writeToFile.close();					// 파일 닫기
+	}
+
+	return 0;
+}
 */
