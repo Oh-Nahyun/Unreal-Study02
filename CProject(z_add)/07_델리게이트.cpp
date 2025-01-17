@@ -39,4 +39,89 @@ namespace Test
 		}
 	};
 }
+
+// --------------------------------------------------
+
+/// C++ 델리게이트 예시
+/// delegate 와 delegator 로 구성
+/// delegator로 지시할 수 있다.
+
+#include <iostream>
+
+using namespace std;
+
+class Car
+{
+public:
+	virtual void Info() = 0; // 순수 클래스 (퓨어 클래스)
+};
+
+// delegate (대리인)
+class carOne : public Car
+{
+public:
+	void Info()
+	{
+		cout << "carOne Info()" << endl;
+	}
+};
+
+// delegate (대리인)
+class carTwo : public Car
+{
+public:
+	void Info()
+	{
+		cout << "carTwo Info()" << endl;
+	}
+};
+
+// delegator (지시자)
+class Delegator : public Car
+{
+private:
+	Car* m_instance;
+public:
+	Delegator()
+	{
+		m_instance = new carOne();
+	}
+
+	void Info()
+	{
+		m_instance->Info();
+	}
+
+	void call_1()
+	{
+		if (m_instance)
+		{
+			delete m_instance;
+		}
+		m_instance = new carTwo();
+	}
+
+	void call_2()
+	{
+		if (m_instance)
+		{
+			delete m_instance;
+		}
+		m_instance = new carOne();
+	}
+};
+
+int main()
+{
+	Delegator* delegator = new Delegator();
+	delegator->Info();
+
+	delegator->call_1();
+	delegator->Info();
+
+	delegator->call_2();
+	delegator->Info();
+
+	return 0;
+}
 */
